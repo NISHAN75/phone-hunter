@@ -80,7 +80,6 @@ const displayResult=(phones)=>{
             </div>
           </div>
           `;
-          console.log(phone.slug)
           phoneContainer.appendChild(div);
           // none spinner
         loadSpinner('none')
@@ -89,7 +88,7 @@ const displayResult=(phones)=>{
 }
 // loading phones details
 const loadPhoneDetails=(phoneID)=>{
-  // console.log(phoneID)
+
   // show spinner
     loadSpinner('inline-block')
     const url=`https://openapi.programming-hero.com/api/phone/${phoneID}`;
