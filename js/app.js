@@ -6,6 +6,7 @@ const loadSpinner=(show)=>{
 const loadSearchData =()=>{
     const searchFiled=document.getElementById('input-filed');
     const searchText=searchFiled.value;
+    const errorContainer=document.getElementById('error-container').innerHTML='';
     // show spinner
     loadSpinner('inline-block')
     if(searchText ==''){
