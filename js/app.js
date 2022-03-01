@@ -70,7 +70,7 @@ const displayResult=(phones)=>{
           const div=document.createElement('div');
           div.innerHTML=`
           <div class="col">
-            <div class="card p-3">
+            <div class="card shadow-lg rounded p-3">
               <img src="${phone.image}" class="h-50 w-50 mx-auto " alt="..." />
               <div class="card-body">
                 <h5 class="card-title">Name:${phone.phone_name}</h5>
@@ -80,6 +80,7 @@ const displayResult=(phones)=>{
             </div>
           </div>
           `;
+          console.log(phone.slug)
           phoneContainer.appendChild(div);
           // none spinner
         loadSpinner('none')
@@ -88,9 +89,11 @@ const displayResult=(phones)=>{
 }
 // loading phones details
 const loadPhoneDetails=(phoneID)=>{
+  // console.log(phoneID)
   // show spinner
     loadSpinner('inline-block')
     const url=`https://openapi.programming-hero.com/api/phone/${phoneID}`;
+    console.log(phoneID)
     fetch(url)
     .then(res =>res.json())
     .then(data => displayPhoneDetails(data.data))
@@ -101,7 +104,7 @@ const displayPhoneDetails =(phone)=>{
     const phoneContainer=document.getElementById('phone-container').innerHTML='';
     const div=document.createElement('div');
     div.innerHTML=`
-            <div class="table-area table-responsive-sm">
+            <div class="table-area table-responsive-sm shadow-lg p-3 rounded">
               <div class="img-area text-center">
                 <img src="${phone.image}" class="h-50 w-25" alt="img not found" />
               </div>
@@ -154,12 +157,11 @@ const displayPhoneDetails =(phone)=>{
                         <tr>
                         <td colspan="2">others:</td>
                         <td><p>
-                        Bluetooth(${phone.others.Bluetooth ? phone.others.Bluetooth:'no found'}),
-                        <br>GPS(${phone.others.GPS ? phone.others.GPS:'no found'}),
-                        <br>NFC(${phone.others.NFC ? phone.others.NFC:'no found'}),
-                        <br>Radio(${phone.others.Radio ? phone.others.Radio:'no found'}),
-                        <br>USB(${phone.others.USB ? phone.others.USB:'no found'}),
-                        <br>WLAN(${phone.others.WLAN ?phone.others.WLAN:'no'})
+                        Bluetooth(${phone.others?.GPS ? phone.others.GPS:'no found'}),
+                        <br>NFC(${phone.others?.NFC ? phone.others.NFC:'no found'}),
+                        <br>Radio(${phone.others?.Radio ? phone.others.Radio:'no found'}),
+                        <br>USB(${phone.others?.USB ? phone.others.USB:'no found'}),
+                        <br>WLAN(${phone.others?.WLAN ?phone.others.WLAN:'no'})
                         </p></td>
                         </tr>
                     </tbody>
