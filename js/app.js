@@ -106,31 +106,32 @@ const displayPhoneDetails =(phone)=>{
                       </tr>
                       <tr>
                       <td colspan="2">Chip:</td>
-                      <td>${phone.mainFeatures.chipSet}</td>
+                      <td>${phone.mainFeatures.chipSet ? phone.mainFeatures.chipSet:'no found'}</td>
                       </tr>
                       <tr>
                       <td colspan="2">Display:</td>
-                      <td>${phone.mainFeatures.displaySize}</td>
+                      <td>${phone.mainFeatures.displaySize ? phone.mainFeatures.displaySize:'no found'}</td>
                       </tr>
                       <tr>
                       <td colspan="2">Memory:</td>
-                      <td>${phone.mainFeatures.memory}</td>
+                      <td>${phone.mainFeatures.memory ? phone.mainFeatures.memory:'no found'}</td>
                       </tr>
                       <tr>
                       <td colspan="2">Storage:</td>
-                      <td>${phone.mainFeatures.storage}</td>
+                      <td>${phone.mainFeatures.storage? phone.mainFeatures.storage:'no found'}</td>
                       </tr>
                       <tr>
                       <td colspan="2">Sensors:</td>
-                      <td>${phone.mainFeatures.sensors}</td>
+                      <td>${phone.mainFeatures.sensors ? phone.mainFeatures.sensors:'no found'}</td>
                       </tr>
                       <tr>
                       <td colspan="2">others:</td>
-                      <td>Bluetooth(${phone.others.Bluetooth}),
-                      <br>GPS(${phone.others.GPS}),
-                      <br>NFC(${phone.others.NFC}),
-                      <br>Radio(${phone.others.Radio}),<br>USB(${phone.others.USB}),
-                      <br>WLAN(${phone.others.WLAN})</td>
+                      <td>Bluetooth(${phone.others.Bluetooth ? phone.others.Bluetooth:'no found'}),
+                      <br>GPS(${phone.others.GPS ? phone.others.GPS:'no found'}),
+                      <br>NFC(${phone.others.NFC ? phone.others.NFC:'no found'}),
+                      <br>Radio(${phone.others.Radio ? phone.others.Radio:'no found'}),
+                      <br>USB(${phone.others.USB ? phone.others.USB:'no found'}),
+                      <br>WLAN(${phone.others.WLAN ?phone.others.WLAN:'no found'})</td>
                       </tr>
                   </tbody>
               </table>
