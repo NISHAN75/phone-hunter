@@ -29,7 +29,7 @@ const loadSearchData =()=>{
       const url=`https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
     .then(res =>res.json())
-    .then(data => displayResult(data.data))
+    .then(data => displayResult(data.data.slice(0,20)))
     const phoneContainer=document.getElementById('phone-container').innerHTML='';
     const errorContainer=document.getElementById('error-container').innerHTML='';
     }
@@ -86,58 +86,71 @@ const displayPhoneDetails =(phone)=>{
     const phoneContainer=document.getElementById('phone-container').innerHTML='';
     const div=document.createElement('div');
     div.innerHTML=`
-        <div class="col">
-          <div class="card w-50 mx-auto p-3">
-            <img src="${phone.image}" class="h-50 w-50 mx-auto " alt="img not found" />
-            <div class="card-body">
-             <table class="table table-hover">
-                  <tbody>
-                      <tr>
-                      <td colspan="2">Name:</td>
-                      <td>${phone.name}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Brand:</td>
-                      <td>${phone.brand}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Launch:</td>
-                      <td>${phone.releaseDate ? phone.releaseDate:'no date find'}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Chip:</td>
-                      <td>${phone.mainFeatures.chipSet ? phone.mainFeatures.chipSet:'no found'}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Display:</td>
-                      <td>${phone.mainFeatures.displaySize ? phone.mainFeatures.displaySize:'no found'}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Memory:</td>
-                      <td>${phone.mainFeatures.memory ? phone.mainFeatures.memory:'no found'}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Storage:</td>
-                      <td>${phone.mainFeatures.storage? phone.mainFeatures.storage:'no found'}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">Sensors:</td>
-                      <td>${phone.mainFeatures.sensors ? phone.mainFeatures.sensors:'no found'}</td>
-                      </tr>
-                      <tr>
-                      <td colspan="2">others:</td>
-                      <td>Bluetooth(${phone.others.Bluetooth ? phone.others.Bluetooth:'no found'}),
-                      <br>GPS(${phone.others.GPS ? phone.others.GPS:'no found'}),
-                      <br>NFC(${phone.others.NFC ? phone.others.NFC:'no found'}),
-                      <br>Radio(${phone.others.Radio ? phone.others.Radio:'no found'}),
-                      <br>USB(${phone.others.USB ? phone.others.USB:'no found'}),
-                      <br>WLAN(${phone.others.WLAN ?phone.others.WLAN:'no found'})</td>
-                      </tr>
-                  </tbody>
-              </table>
+            <div class="table-area table-responsive-sm">
+              <div class="img-area text-center">
+                <img src="${phone.image}" class="h-50 w-25" alt="img not found" />
+              </div>
+              <div class="table-content">
+              <table class="table table-hover">
+                    <tbody>
+                        <div class="row">
+                        <div class="col-sm-12">
+                        <tr>
+                        <td colspan="2">Name:</td>
+                        <td>${phone.name}</td>
+                        </tr>
+                        </div>
+                        </div>
+                        <tr>
+                        <td colspan="2">Brand:</td>
+                        <td>${phone.brand}</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Launch:</td>
+                        <td>${phone.releaseDate ? phone.releaseDate:'no date find'}</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Chip:</td>
+                        <td>${phone.mainFeatures.chipSet ? phone.mainFeatures.chipSet:'no found'}</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Display:</td>
+                        <td>${phone.mainFeatures.displaySize ? phone.mainFeatures.displaySize:'no found'}</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Memory:</td>
+                        <td>${phone.mainFeatures.memory ? phone.mainFeatures.memory:'no found'}</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Storage:</td>
+                        <td>${phone.mainFeatures.storage? phone.mainFeatures.storage:'no found'}</td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">Sensors:</td>
+                        <td><P>
+                        ${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[0]:'no found'},
+                        ${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[1]:'no found'},
+                        ${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[2]:'no found'},
+                        ${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[3]:'no found'},
+                        ${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[4]:'no found'},
+                        ${phone.mainFeatures.sensors[0] ? phone.mainFeatures.sensors[5]:'no found'},
+                        </P></td>
+                        </tr>
+                        <tr>
+                        <td colspan="2">others:</td>
+                        <td><p>
+                        Bluetooth(${phone.others.Bluetooth ? phone.others.Bluetooth:'no found'}),
+                        <br>GPS(${phone.others.GPS ? phone.others.GPS:'no found'}),
+                        <br>NFC(${phone.others.NFC ? phone.others.NFC:'no found'}),
+                        <br>Radio(${phone.others.Radio ? phone.others.Radio:'no found'}),
+                        <br>USB(${phone.others.USB ? phone.others.USB:'no found'}),
+                        <br>WLAN(${phone.others.WLAN ?phone.others.WLAN:'no'})
+                        </p></td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        </div>
         `;
         detailsContainer.appendChild(div);
 
