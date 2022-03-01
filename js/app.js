@@ -1,7 +1,13 @@
+// spinner loading
+const loadSpinner=(show)=>{
+  document.getElementById('loading-spinner').style.display=show;
+};
 // load Searching data 
 const loadSearchData =()=>{
     const searchFiled=document.getElementById('input-filed');
     const searchText=searchFiled.value;
+    // show spinner
+    loadSpinner('inline-block')
     if(searchText ==''){
       const errorContainer=document.getElementById('error-container');
       const phoneContainer=document.getElementById('phone-container').innerHTML='';
@@ -12,7 +18,8 @@ const loadSearchData =()=>{
       `;
       p.classList.add('text-danger','fs-3');
       errorContainer.appendChild(p);
-    
+      // none spinner
+      loadSpinner('none')
     }
     else if(isNaN(searchText)==false){
       const errorContainer=document.getElementById('error-container');
@@ -24,6 +31,8 @@ const loadSearchData =()=>{
       `;
       p.classList.add('text-danger','fs-3');
       errorContainer.appendChild(p);
+       // none spinner
+       loadSpinner('none')
     }
     else{
       const url=`https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -32,6 +41,7 @@ const loadSearchData =()=>{
     .then(data => displayResult(data.data.slice(0,20)))
     const phoneContainer=document.getElementById('phone-container').innerHTML='';
     const errorContainer=document.getElementById('error-container').innerHTML='';
+    
     }
     searchFiled.value='';
     
@@ -40,7 +50,6 @@ const loadSearchData =()=>{
 }
 // dispaly in searching Data
 const displayResult=(phones)=>{
-  console.log(phones)
   if(phones ==0){
     const errorContainer=document.getElementById('error-container');
     const phoneContainer=document.getElementById('phone-container').innerHTML='';
@@ -51,8 +60,10 @@ const displayResult=(phones)=>{
     `;
     p.classList.add('text-danger','fs-3');
     errorContainer.appendChild(p);
+    loadSpinner('none')
   }
    else{
+      
         phones.forEach(phone => {
           const phoneContainer=document.getElementById('phone-container');
           const detailsContainer=document.getElementById('details-container').innerHTML='';
@@ -70,11 +81,15 @@ const displayResult=(phones)=>{
           </div>
           `;
           phoneContainer.appendChild(div);
+          // none spinner
+        loadSpinner('none')
       });
    }
 }
 // loading phones details
 const loadPhoneDetails=(phoneID)=>{
+  // show spinner
+    loadSpinner('inline-block')
     const url=`https://openapi.programming-hero.com/api/phone/${phoneID}`;
     fetch(url)
     .then(res =>res.json())
@@ -153,6 +168,8 @@ const displayPhoneDetails =(phone)=>{
             </div>
         `;
         detailsContainer.appendChild(div);
+        // none spinner
+        loadSpinner('none')
 
 }
 
