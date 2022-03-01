@@ -75,7 +75,7 @@ const displayResult=(phones)=>{
               <div class="card-body">
                 <h5 class="card-title">Name:${phone.phone_name}</h5>
                 <h5>Brand:${phone.brand}</h5>
-                <button class="bg-info" onclick="loadPhoneDetails('${phone.slug}')">Details</button>
+                <button class="phone-btn bg-primary" onclick="loadPhoneDetails('${phone.slug}')">Details</button>
               </div>
             </div>
           </div>
