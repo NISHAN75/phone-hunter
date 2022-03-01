@@ -2,34 +2,76 @@
 const loadSearchData =()=>{
     const searchFiled=document.getElementById('input-filed');
     const searchText=searchFiled.value;
-    searchFiled.value='';
-    // data calling
-    const url=`https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+    if(searchText ==''){
+      const errorContainer=document.getElementById('error-container');
+      const phoneContainer=document.getElementById('phone-container').innerHTML='';
+      const detailsContainer=document.getElementById('details-container').innerHTML='';
+      const p=document.createElement('p');
+      p.innerHTML=`
+      Sorry sir,Search a phone name
+      `;
+      p.classList.add('text-danger','fs-3');
+      errorContainer.appendChild(p);
+    
+    }
+    else if(isNaN(searchText)==false){
+      const errorContainer=document.getElementById('error-container');
+      const phoneContainer=document.getElementById('phone-container').innerHTML='';
+      const detailsContainer=document.getElementById('details-container').innerHTML='';
+      const p=document.createElement('p');
+      p.innerHTML=`
+      Sorry sir,Search a phone name
+      `;
+      p.classList.add('text-danger','fs-3');
+      errorContainer.appendChild(p);
+    }
+    else{
+      const url=`https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
     .then(res =>res.json())
     .then(data => displayResult(data.data))
+    const phoneContainer=document.getElementById('phone-container').innerHTML='';
+    const errorContainer=document.getElementById('error-container').innerHTML='';
+    }
+    searchFiled.value='';
+    
+    // data calling
+    
 }
 // dispaly in searching Data
 const displayResult=(phones)=>{
-    phones.forEach(phone => {
-        console.log(phone)
-        const phoneContainer=document.getElementById('phone-container');
-        const detailsContainer=document.getElementById('details-container').innerHTML='';
-        const div=document.createElement('div');
-        div.innerHTML=`
-        <div class="col">
-          <div class="card p-3">
-            <img src="${phone.image}" class="h-50 w-50 mx-auto " alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Name:${phone.phone_name}</h5>
-              <h5>Brand:${phone.brand}</h5>
-              <button class="bg-info" onclick="loadPhoneDetails('${phone.slug}')">Details</button>
+  console.log(phones)
+  if(phones ==0){
+    const errorContainer=document.getElementById('error-container');
+    const phoneContainer=document.getElementById('phone-container').innerHTML='';
+    const detailsContainer=document.getElementById('details-container').innerHTML='';
+    const p=document.createElement('p');
+    p.innerHTML=`
+    Sorry sir,No Found this Phone!!try againg...
+    `;
+    p.classList.add('text-danger','fs-3');
+    errorContainer.appendChild(p);
+  }
+   else{
+        phones.forEach(phone => {
+          const phoneContainer=document.getElementById('phone-container');
+          const detailsContainer=document.getElementById('details-container').innerHTML='';
+          const div=document.createElement('div');
+          div.innerHTML=`
+          <div class="col">
+            <div class="card p-3">
+              <img src="${phone.image}" class="h-50 w-50 mx-auto " alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Name:${phone.phone_name}</h5>
+                <h5>Brand:${phone.brand}</h5>
+                <button class="bg-info" onclick="loadPhoneDetails('${phone.slug}')">Details</button>
+              </div>
             </div>
           </div>
-        </div>
-        `;
-        phoneContainer.appendChild(div);
-    });
+          `;
+          phoneContainer.appendChild(div);
+      });
+   }
 }
 // loading phones details
 const loadPhoneDetails=(phoneID)=>{
@@ -40,7 +82,6 @@ const loadPhoneDetails=(phoneID)=>{
 }
 // dispaly phone details
 const displayPhoneDetails =(phone)=>{
-    console.log(phone)
     const detailsContainer=document.getElementById('details-container');
     const phoneContainer=document.getElementById('phone-container').innerHTML='';
     const div=document.createElement('div');
@@ -50,7 +91,7 @@ const displayPhoneDetails =(phone)=>{
             <img src="${phone.image}" class="h-50 w-50 mx-auto " alt="img not found" />
             <div class="card-body">
              <table class="table table-hover">
-                 <tbody>
+                  <tbody>
                       <tr>
                       <td colspan="2">Name:</td>
                       <td>${phone.name}</td>
@@ -61,7 +102,7 @@ const displayPhoneDetails =(phone)=>{
                       </tr>
                       <tr>
                       <td colspan="2">Launch:</td>
-                      <td>${phone.releaseDate}</td>
+                      <td>${phone.releaseDate ? phone.releaseDate:'no date find'}</td>
                       </tr>
                       <tr>
                       <td colspan="2">Chip:</td>
@@ -85,7 +126,11 @@ const displayPhoneDetails =(phone)=>{
                       </tr>
                       <tr>
                       <td colspan="2">others:</td>
-                      <td>Bluetooth(${phone.others.Bluetooth}),GPS(${phone.others.GPS}),NFC(${phone.others.NFC}),Radio(${phone.others.Radio}),USB(${phone.others.USB}),WLAN(${phone.others.WLAN}),</td>
+                      <td>Bluetooth(${phone.others.Bluetooth}),
+                      <br>GPS(${phone.others.GPS}),
+                      <br>NFC(${phone.others.NFC}),
+                      <br>Radio(${phone.others.Radio}),<br>USB(${phone.others.USB}),
+                      <br>WLAN(${phone.others.WLAN})</td>
                       </tr>
                   </tbody>
               </table>
