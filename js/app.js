@@ -93,7 +93,6 @@ const loadPhoneDetails=(phoneID)=>{
   // show spinner
     loadSpinner('inline-block')
     const url=`https://openapi.programming-hero.com/api/phone/${phoneID}`;
-    console.log(phoneID)
     fetch(url)
     .then(res =>res.json())
     .then(data => displayPhoneDetails(data.data))
